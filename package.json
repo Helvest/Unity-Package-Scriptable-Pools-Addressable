@@ -1,0 +1,40 @@
+{
+
+	"name": "com.helvest.scriptablepoolsaddressable",
+
+	"version": "1.0.0",
+
+	"displayName": "Scriptable Pool Addressable",
+
+	"description": "Script to create ScriptableObjects that you can use as Pools for Addressables Components",
+
+	"dependencies":
+	{
+		"com.helvest.scriptablepools": "https://github.com/Helvest/Unity-Package-Scriptable-Pools",
+		"com.unity.addressables": "1.10.0"
+	},
+
+	"keywords":
+	[
+		"Pool",
+
+		"Pooling",
+
+		"ScriptableObject",
+
+		"Addressable"
+	],
+
+	"author":
+	{
+		"name": "Pedro Dominicé (Helvest)",
+
+		"url": "https://twitter.com/HelvestEpic"
+	},
+
+	"repository": {
+		"url": "https://github.com/Helvest/Unity-Package-Scriptable-Pools-Addressable.git",
+		"type": "git"
+	}
+	
+}
