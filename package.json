@@ -10,8 +10,8 @@
 
 	"dependencies":
 	{
-		"com.helvest.scriptablepools": "https://github.com/Helvest/Unity-Package-Scriptable-Pools.git",
-		"com.unity.addressables": "1.10.0"
+		"com.unity.addressables": "1.10.0",
+		"com.helvest.scriptablepools": "https://github.com/Helvest/Unity-Package-Scriptable-Pools.git"
 	},
 
 	"keywords":
