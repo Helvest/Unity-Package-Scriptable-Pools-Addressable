@@ -11,10 +11,10 @@ namespace ScriptablePool.Addressable
 		#region Variables
 
 		[SerializeField]
-		private AssetReference _assetReference;
+		private AssetReference _assetReference = null;
 
 		[NonSerialized]
-		private C _prefab;
+		private C _prefab = null;
 
 		protected override GameObject _Prefab => _prefab.gameObject;
 
