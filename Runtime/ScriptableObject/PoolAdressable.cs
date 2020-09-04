@@ -5,7 +5,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace ScriptablePool.Addressable
 {
-	public abstract class PoolAdressable<C> : PoolAbstract where C : Component
+	public abstract class PoolAdressable<T> : PoolAbstract<T> where T : Component
 	{
 
 		#region Variables
@@ -14,9 +14,9 @@ namespace ScriptablePool.Addressable
 		private AssetReference _assetReference = null;
 
 		[NonSerialized]
-		private C _prefab = null;
+		private T _prefab = null;
 
-		protected override GameObject _Prefab => _prefab.gameObject;
+		protected override T _Prefab => _prefab;
 
 		public bool IsReady => _prefab != null;
 
@@ -26,25 +26,15 @@ namespace ScriptablePool.Addressable
 
 		protected override void OnEnablePool()
 		{
-#if UNITY_EDITOR
-			GameObject go = new GameObject($"Pool {_assetReference.editorAsset.name}");
-			go.SetActive(false);
-			go.isStatic = true;
-
-			_parent = go.transform;
-			_parent.parent = _bigParent;
-#endif
-
-			var _asyncOperationHandle = Addressables.LoadAssetAsync<C>(_assetReference);
-			_asyncOperationHandle.Completed += OnLoadDone;
+			Addressables.LoadAssetAsync<T>(_assetReference).Completed += OnLoadDone;
 		}
 
 		protected override void OnDisablePool()
 		{
 			if (_prefab)
 			{
-				_assetReference.ReleaseAsset();
 				_prefab = null;
+				_assetReference.ReleaseAsset();
 			}
 		}
 
@@ -52,20 +42,23 @@ namespace ScriptablePool.Addressable
 
 		#region OnLoadDone
 
-		private void OnLoadDone(AsyncOperationHandle<C> obj)
+		private void OnLoadDone(AsyncOperationHandle<T> obj)
 		{
 			_prefab = obj.Result;
 
-			for (int i = 0; i < _poolOverideSize; i++)
+			for (int i = 0; i < poolOverideSize; i++)
 			{
-				var go = Instantiate(_prefab, _parent).gameObject;
-				go.SetActive(false);
+				T component = Instantiate(_prefab, poolParent);
 
-				_poolList.Add(go);
-				_queu.Enqueue(go);
+				var poolObject = new PoolObject<T>(component);
+
+				poolObject.gameObject.SetActive(false);
+
+				_poolList.Add(poolObject);
+				_queu.Enqueue(poolObject);
 
 #if UNITY_EDITOR
-				go.name = $"{_prefab.name}_{i:000}";
+				component.name = $"{_prefab.name}_{i:000}";
 #endif
 			}
 		}

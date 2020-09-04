@@ -1,11 +1,11 @@
 {
   "name": "com.helvest.scriptablepoolsaddressable",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "displayName": "Scriptable Pool Addressable",
   "description": "Script to create ScriptableObjects that you can use as Pools for Addressables Components",
   "dependencies": {
     "com.unity.addressables": "1.10.0",
-    "com.helvest.scriptablepools": "1.0.1"
+    "com.helvest.scriptablepools": "1.1.0"
   },
   "keywords": [
     "Pool",
