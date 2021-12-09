@@ -48,7 +48,7 @@ namespace ScriptablePool.Addressable
 
 			for (int i = 0; i < poolOverideSize; i++)
 			{
-				T component = Instantiate(_prefab, poolParent);
+				var component = Instantiate(_prefab, poolParent);
 
 				var poolObject = new PoolObject<T>(component);
 
