@@ -8,7 +8,7 @@ namespace ScriptablePool.Addressable
 	public abstract class PoolAdressable<T> : PoolAbstract<T> where T : Component
 	{
 
-		#region Variables
+		#region Fields
 
 		[SerializeField]
 		private AssetReference _assetReference = null;
